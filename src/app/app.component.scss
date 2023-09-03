@@ -1,0 +1,48 @@
+.bg-container {
+  display: flex;
+  flex-direction: column;
+  background-image: url("../assets/images/bg.jpg");
+  background-size: cover;
+  width: 100%;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.content-rectangle {
+  margin: auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+.content-rectangle mat-icon {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.language-button-container {
+  display: flex;
+  position: absolute;
+  right: 10px;
+}
+
+footer {
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-top: 1px solid #d9534f;
+}

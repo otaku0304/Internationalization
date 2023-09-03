@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2"
+    xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en-US" target-language="sr" datatype="plaintext" original="ng2.template">
+        <body>
+            <trans-unit id="welcomeMessage" datatype="html">
+                <source>Welcome to my i18n demonstration page! Here, we&apos;re showcasing the power of internationalization (i18n) – a crucial aspect of modern applications that enables them to adapt and cater to diverse audiences around the world.</source>
+                <target>Dobrodošli na našu stranicu za demonstraciju i18n! Ovde prikazujemo moć internacionalizacije (i18n) - ključnog aspekta modernih aplikacija koji im omogućava da se prilagode i zadovolje raznoliku publiku širom sveta.</target>
+            </trans-unit>
+            <trans-unit id="navigateMessage" datatype="html">
+                <source>As you navigate through this page, you&apos;ll notice that the content seamlessly transforms to match different languages and locales. This means that whether you&apos;re reading this in English, Spanish, French, or any other language, the message remains clear and accessible.</source>
+                <target>Kako navigirate kroz ovu stranicu, primetićete da se sadržaj bez problema transformiše kako bi se prilagodio različitim jezicima i lokalizacijama. Ovo znači da bez obzira da li čitate na engleskom, španskom, francuskom ili nekom drugom jeziku, poruka ostaje jasna i dostupna.</target>
+            </trans-unit>
+            <trans-unit id="beyondTranslationMessage" datatype="html">
+                <source>i18n goes beyond just translating words; it encompasses date formats, currencies, and even cultural nuances, ensuring that users feel at home no matter where they&apos;re from.</source>
+                <target>i18n prevazilazi puko prevođenje reči; obuhvata formate datuma, valute, pa čak i kulturne nijanse, osiguravajući da se korisnici osećaju kao kod kuće bez obzira odakle dolaze.</target>
+            </trans-unit>
+            <trans-unit id="languageSelectorMessage" datatype="html">
+                <source>Feel free to switch between languages using the language selector at the top of the page. Watch as the content instantly adapts, showcasing the magic of i18n.</source>
+                <target>Slobodno menjajte jezike koristeći selektor jezika na vrhu stranice. Posmatrajte kako se sadržaj trenutno prilagođava, prikazujući magiju i18n.</target>
+            </trans-unit>
+            <trans-unit id="thankYouMessage" datatype="html">
+                <source>Thank you for being a part of this journey into the world of i18n. Your seamless experience across languages starts right here, right now.</source>
+                <target>Hvala vam što ste deo ove avanture u svet i18n. Vaše besprekorno iskustvo preko jezika počinje baš ovde, baš sada.</target>
+            </trans-unit>
+            <trans-unit id="authorHeading" datatype="html">
+        <source>Author</source>
+        <target>Аутор</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutMeHeading" datatype="html">
+        <source>About Me</source>
+                <target>О мени</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutMeContent" datatype="html">
+        <source> Hello there! I&apos;m Sai Krishna Annam, a passionate Full Stack developer who thrives on bringing ideas to life through code. With a knack for problem-solving and a love for crafting seamless digital experiences, I&apos;m always on the lookout for the next exciting challenge in the world of web development. </source>
+        <target>Поздрав! Ја сам Саи Крисхна Аннам, страствени Фулл Стацк програмер који успева у оживљавању идеја кроз код. Са вештином за решавање проблема и љубављу према стварању беспрекорних дигиталних искустава, увек сам у потрази за следећим узбудљивим изазовом у свету веб развоја.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">11,17</context>
+        </context-group>
+      </trans-unit>
+       <trans-unit id="journeyHeading" datatype="html">
+        <source>My Journey</source>
+        <target>Моје путовање</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+              <trans-unit id="journeyContent1" datatype="html">
+        <source> My journey into the world of programming began with an unexpected twist. Graduating in Mechanical Engineering, I was far from familiar with coding. However, my strong affinity for technology and my knack for making the most out of a PC ignited a spark within me. It was this very interest that motivated me to embark on a new adventure: learning to code. </source>
+        <target>Моје путовање у свет програмирања почело је неочекиваним обртом. Дипломирао сам на Машинском факултету, био сам далеко од познавања кодирања. Међутим, мој снажан афинитет према технологији и моја способност да максимално искористим рачунар запалили су искру у мени. Управо то интересовање ме је мотивисало да се упустим у нову авантуру: учење кодирања.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">21,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="journeyContent2" datatype="html">
+        <source> Starting from scratch, I dabbled with HTML and CSS during those initial days. The world of tags and styling felt like a whole new language, but I was determined to decode it. As my proficiency grew, I transitioned to exploring the intricacies of back-end development. Each line of code I typed was a stepping stone towards becoming a versatile Full Stack developer. </source>
+         <target>Почевши од нуле, бавио сам се ХТМЛ и ЦСС током тих првих дана. Свет ознака и стилова се осећао као потпуно нови језик, али сам био одлучан да га дешифрујем. Како је моје знање расло, прешао сам на истраживање замршености позадинског развоја. Сваки ред кода који сам откуцао био је одскочна даска ка томе да постанем свестрани програмер за Фулл Стацк.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">28,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="journeyContent3" datatype="html">
+        <source> Throughout this journey, I&apos;ve had the privilege of collaborating with exceptionally talented individuals and dynamic teams. These experiences have not only honed my technical skills but have also added layers of depth to my expertise. I&apos;ve come to realize that coding isn&apos;t just about syntax and algorithms; it&apos;s about creatively solving problems and building digital experiences that leave a mark. </source>
+         <target>Током овог путовања, имао сам привилегију да сарађујем са изузетно талентованим појединцима и динамичним тимовима. Ова искуства нису само усавршила моје техничке вештине, већ су додала и слојеве дубине мојој стручности. Схватио сам да кодирање није само синтакса и алгоритми; ради се о креативном решавању проблема и изградњи дигиталних искустава која остављају траг.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">35,42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="journeyContent4" datatype="html">
+        <source> From a Mechanical Engineering graduate to a Full Stack developer, my journey has been an incredible ride full of challenges, triumphs, and a constant thirst for knowledge. I&apos;m excited to continue this ever-evolving adventure, leveraging my unique background to bring innovative solutions to life. </source>
+         <target>Од дипломираног инжењера машинства до фулл стацк програмера, моје путовање је било невероватна вожња пуна изазова, тријумфа и сталне жеђи за знањем. Узбуђен сам што ћу наставити ову авантуру која се непрестано развија, користећи своју јединствену позадину да оживим иновативна решења.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">43,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="journeyContent5" datatype="html">
+        <source> Remember, it&apos;s never about where you start, but the determination and passion that drive you forward. My story is a testament to the fact that unexpected interests can lead to extraordinary paths. </source>
+         <target>Запамтите, никада није важно одакле почињете, већ одлучност и страст који вас воде напред. Моја прича је сведочанство чињенице да неочекивана интересовања могу довести до изванредних путева.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">49,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="journeyContent6" datatype="html">
+        <source> Stay curious, keep coding, and let&apos;s shape the future one line of code at a time. </source>
+         <target>Останите радознали, наставите са кодирањем и хајде да обликујемо будућност један по један ред кода.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">54,57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="connectHeading" datatype="html">
+        <source>Connect with Me</source>
+         <target>Повежи се са мном</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="connectHeadingContent" datatype="html">
+        <source> If you&apos;re curious about my work and the projects I&apos;ve had the pleasure of contributing to, feel free to explore my portfolio and GitHub repositories. You can also connect with me on my social media accounts: </source>
+         <target>Ако сте радознали о мом раду и пројектима којима сам имао задовољство да допринесем, слободно истражите мој портфолио и ГитХуб репозиторије. Такође се можете повезати са мном на мојим налозима друштвених медија:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">61,65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="linktreeLink" datatype="html">
+        <source>Linktree - MR_ASK_Chay</source>
+         <target>Linktree - MR_ASK_Chay</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Thanking" datatype="html">
+        <source> Thank you for stopping by and getting to know me better. Let&apos;s embark on this journey of innovation and growth together! </source>
+         <target>Хвала вам што сте свратили и боље ме упознали. Кренимо на ово путовање иновација и раста заједно!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">76,79</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stayCuriousMessage" datatype="html">
+        <source> Stay curious, stay creative, and keep coding! </source>
+         <target>Останите радознали, останите креативни и наставите да кодирате!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">80,82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="warmRegards" datatype="html">
+        <source>Warm regards,</source>
+         <target>Топли поздрав,</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="yourName" datatype="html">
+        <source>Sai Krishna Annam</source>
+         <target>Sai Krishna Annam</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+      </trans-unit>
+        </body>
+    </file>
+</xliff>

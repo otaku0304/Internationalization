@@ -13,6 +13,22 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "en": {
+            "translation": "src/translate/messages.en.xlf"
+          },
+          "nl": {
+            "translation": "src/translate/messages.nl.xlf",
+            "baseHref": "/nl/"
+          },
+          "sr": {
+            "translation": "src/translate/messages.sr.xlf",
+            "baseHref": "/sr/"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -30,6 +46,8 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -50,6 +68,21 @@
               ],
               "outputHashing": "all"
             },
+            "en": {
+              "localize": [
+                "en"
+              ]
+            },
+            "nl": {
+              "localize": [
+                "nl"
+              ]
+            },
+            "sr": {
+              "localize": [
+                "sr"
+              ]
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -69,6 +102,15 @@
             },
             "development": {
               "browserTarget": "internationalization:build:development"
+            },
+            "en": {
+              "browserTarget": "i18n:build:en"
+            },
+            "nl": {
+              "browserTarget": "i18n:build:nl"
+            },
+            "sr": {
+              "browserTarget": "i18n:build:sr"
             }
           },
           "defaultConfiguration": "development"
@@ -93,6 +135,8 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": []
