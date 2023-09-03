@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2"
+    xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en-US" target-language="nl" datatype="plaintext" original="ng2.template">
+        <body>
+            <trans-unit id="welcomeMessage" datatype="html">
+                <source>Welcome to my i18n demonstration page! Here, we&apos;re showcasing the power of internationalization (i18n) – a crucial aspect of modern applications that enables them to adapt and cater to diverse audiences around the world.</source>
+                <target>Welkom bij mijn i18n-demonstratiepagina! Hier laten we de kracht van internationalisatie (i18n) zien - een cruciaal aspect van moderne applicaties dat ze in staat stelt zich aan te passen en te voorzien in diverse doelgroepen over de hele wereld.</target>
+            </trans-unit>
+            <trans-unit id="navigateMessage" datatype="html">
+                <source>As you navigate through this page, you&apos;ll notice that the content seamlessly transforms to match different languages and locales. This means that whether you&apos;re reading this in English, Spanish, French, or any other language, the message remains clear and accessible.</source>
+                <target>Terwijl je door deze pagina navigeert, zul je merken dat de inhoud naadloos verandert om overeen te komen met verschillende talen en regio's. Dit betekent dat of je dit nu leest in het Engels, Spaans, Frans of een andere taal, de boodschap duidelijk en toegankelijk blijft.</target>
+            </trans-unit>
+            <trans-unit id="beyondTranslationMessage" datatype="html">
+                <source>i18n goes beyond just translating words; it encompasses date formats, currencies, and even cultural nuances, ensuring that users feel at home no matter where they&apos;re from.</source>
+                <target>i18n gaat verder dan alleen woorden vertalen; het omvat datums, valuta en zelfs culturele nuances, waardoor gebruikers zich thuis voelen, ongeacht waar ze vandaan komen.</target>
+            </trans-unit>
+            <trans-unit id="languageSelectorMessage" datatype="html">
+                <source>Feel free to switch between languages using the language selector at the top of the page. Watch as the content instantly adapts, showcasing the magic of i18n.</source>
+                <target>Voel je vrij om tussen talen te schakelen met behulp van de taalselector bovenaan de pagina. Kijk hoe de inhoud direct aanpast en de magie van i18n laat zien.</target>
+            </trans-unit>
+            <trans-unit id="thankYouMessage" datatype="html">
+                <source>Thank you for being a part of this journey into the world of i18n. Your seamless experience across languages starts right here, right now.</source>
+                <target>Dank je wel dat je deel uitmaakt van deze reis in de wereld van i18n. Jouw naadloze ervaring over talen heen begint hier, nu.</target>
+            </trans-unit>
+            <trans-unit id="authorHeading" datatype="html">
+        <source>Author</source>
+                        <target>Auteur</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutMeHeading" datatype="html">  
+        <source>About Me</source>
+                        <target>Over mij</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutMeContent" datatype="html">
+        <source> Hello there! I&apos;m Sai Krishna Annam, a passionate Full Stack developer who thrives on bringing ideas to life through code. With a knack for problem-solving and a love for crafting seamless digital experiences, I&apos;m always on the lookout for the next exciting challenge in the world of web development. </source>
+        <target>Hallo daar! Ik ben Sai Krishna Annam, een gepassioneerde Full Stack-ontwikkelaar die ervan houdt ideeën tot leven te brengen door middel van code. Met een talent voor probleemoplossing en een voorliefde voor het creëren van naadloze digitale ervaringen, ben ik altijd op zoek naar de volgende spannende uitdaging in de wereld van webontwikkeling.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">11,17</context>
+        </context-group>
+      </trans-unit>
+       <trans-unit id="journeyHeading" datatype="html">
+        <source>My Journey</source>
+        <target>Mijn reis</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+              <trans-unit id="journeyContent1" datatype="html">
+        <source> My journey into the world of programming began with an unexpected twist. Graduating in Mechanical Engineering, I was far from familiar with coding. However, my strong affinity for technology and my knack for making the most out of a PC ignited a spark within me. It was this very interest that motivated me to embark on a new adventure: learning to code. </source>
+         <target>Mijn reis in de wereld van programmeren begon met een onverwachte wending. Toen ik afstudeerde in Werktuigbouwkunde, was ik verre van bekend met coderen. Maar mijn sterke affiniteit met technologie en mijn talent om het maximale uit een pc te halen, zorgden ervoor dat er een vonk in mij ontstond. Het was juist deze interesse die mij motiveerde om aan een nieuw avontuur te beginnen: leren coderen.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">21,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="journeyContent2" datatype="html">
+        <source> Starting from scratch, I dabbled with HTML and CSS during those initial days. The world of tags and styling felt like a whole new language, but I was determined to decode it. As my proficiency grew, I transitioned to exploring the intricacies of back-end development. Each line of code I typed was a stepping stone towards becoming a versatile Full Stack developer. </source>
+         <target>Ik begon helemaal opnieuw en heb de eerste dagen met HTML en CSS gewerkt. De wereld van tags en styling voelde als een geheel nieuwe taal, maar ik was vastbesloten om deze te decoderen. Naarmate mijn vaardigheid groeide, ging ik de overstap maken naar het verkennen van de fijne kneepjes van back-endontwikkeling. Elke regel code die ik typte was een opstapje om een ​​veelzijdige Full Stack-ontwikkelaar te worden.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">28,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="journeyContent3" datatype="html">
+        <source> Throughout this journey, I&apos;ve had the privilege of collaborating with exceptionally talented individuals and dynamic teams. These experiences have not only honed my technical skills but have also added layers of depth to my expertise. I&apos;ve come to realize that coding isn&apos;t just about syntax and algorithms; it&apos;s about creatively solving problems and building digital experiences that leave a mark. </source>
+         <target>Tijdens deze reis heb ik het voorrecht gehad om samen te werken met uitzonderlijk getalenteerde individuen en dynamische teams. Deze ervaringen hebben niet alleen mijn technische vaardigheden aangescherpt, maar hebben ook verdieping aan mijn expertise toegevoegd. Ik ben tot het besef gekomen dat coderen niet alleen om syntaxis en algoritmen gaat; het gaat over het creatief oplossen van problemen en het bouwen van digitale ervaringen die een stempel drukken.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">35,42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="journeyContent4" datatype="html">
+        <source> From a Mechanical Engineering graduate to a Full Stack developer, my journey has been an incredible ride full of challenges, triumphs, and a constant thirst for knowledge. I&apos;m excited to continue this ever-evolving adventure, leveraging my unique background to bring innovative solutions to life. </source>
+        <target>Van afgestudeerd werktuigbouwkundig ingenieur tot full-stack-ontwikkelaar, mijn reis was een ongelooflijke rit vol uitdagingen, triomfen en een constante honger naar kennis. Ik kijk ernaar uit om dit steeds evoluerende avontuur voort te zetten en mijn unieke achtergrond te benutten om innovatieve oplossingen tot leven te brengen.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">43,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="journeyContent5" datatype="html">
+        <source> Remember, it&apos;s never about where you start, but the determination and passion that drive you forward. My story is a testament to the fact that unexpected interests can lead to extraordinary paths. </source>
+         <target>Vergeet niet dat het nooit gaat om waar je begint, maar om de vastberadenheid en passie die je vooruit drijven. Mijn verhaal getuigt van het feit dat onverwachte interesses tot buitengewone paden kunnen leiden.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">49,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="journeyContent6" datatype="html">
+        <source> Stay curious, keep coding, and let&apos;s shape the future one line of code at a time. </source>
+        <target>Blijf nieuwsgierig, blijf coderen en laten we de toekomst regel voor code vormgeven.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">54,57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="connectHeading" datatype="html">
+        <source>Connect with Me</source>
+         <target>Maak contact met mij</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="connectHeadingContent" datatype="html">
+        <source> If you&apos;re curious about my work and the projects I&apos;ve had the pleasure of contributing to, feel free to explore my portfolio and GitHub repositories. You can also connect with me on my social media accounts: </source>
+         <target>Als je nieuwsgierig bent naar mijn werk en de projecten waaraan ik heb mogen bijdragen, kun je gerust mijn portfolio en GitHub-repository's verkennen. Je kunt ook contact met mij opnemen via mijn sociale media-accounts:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">61,65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="linktreeLink" datatype="html">
+        <source>Linktree - MR_ASK_Chay</source>
+         <target>Linktree - MR_ASK_Chay</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Thanking" datatype="html">
+        <source> Thank you for stopping by and getting to know me better. Let&apos;s embark on this journey of innovation and growth together! </source>
+        <target>Bedankt dat je langskwam en mij beter leerde kennen. Laten we samen aan deze reis van innovatie en groei beginnen!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">76,79</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stayCuriousMessage" datatype="html">
+        <source> Stay curious, stay creative, and keep coding! </source>
+         <target>Blijf nieuwsgierig, blijf creatief en blijf coderen!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">80,82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="warmRegards" datatype="html">
+        <source>Warm regards,</source>
+         <target>Hartelijke groeten,</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="yourName" datatype="html">
+        <source>Sai Krishna Annam</source>
+         <target>Sai Krishna Annam</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+      </trans-unit>
+        </body>
+    </file>
+</xliff>
