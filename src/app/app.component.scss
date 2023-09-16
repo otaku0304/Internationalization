@@ -45,4 +45,8 @@ footer {
   text-align: center;
   padding: 10px 0;
   border-top: 1px solid #d9534f;
+  border-left: 1px solid #d9534f;
+  border-right: 1px solid #d9534f;
+  border-bottom: 1px solid #d9534f;
+  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }
