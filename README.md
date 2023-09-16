@@ -2,7 +2,7 @@
 
 This is a demo project showcasing internationalization (i18n) in a frontend Angular application. The project is hosted on Firebase and is available in multiple languages, including English, Serbian, and Dutch.
 
-**Demo URL:** [https://i18n-6e819.web.app/en/#/home](https://i18n-6e819.web.app/en/#/home)
+**Demo URL:** [Demo Site](https://internationalization-d2aa6.web.app/en/#/home)
 
 ## Features
 
@@ -12,7 +12,7 @@ This is a demo project showcasing internationalization (i18n) in a frontend Angu
 
 ## Usage
 
-1. Visit the [Demo Site](https://i18n-6e819.web.app/en/#/home) using the link above.
+1. Visit the [Demo Site](https://internationalization-d2aa6.web.app/en/#/home) using the link above.
 
 2. Explore the website, and you can switch between languages using the language selector provided.
 
