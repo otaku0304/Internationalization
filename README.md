@@ -1,27 +1,48 @@
-# Internationalization
+# i18n Internationalization Demo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
+This is a demo project showcasing internationalization (i18n) in a frontend Angular application. The project is hosted on Firebase and is available in multiple languages, including English, Serbian, and Dutch.
 
-## Development server
+**Demo URL:** [https://i18n-6e819.web.app/en/#/home](https://i18n-6e819.web.app/en/#/home)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- Multi-language support with i18n.
+- Clean and responsive user interface.
+- Hosted on Firebase for easy access.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Usage
 
-## Build
+1. Visit the [Demo Site](https://i18n-6e819.web.app/en/#/home) using the link above.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. Explore the website, and you can switch between languages using the language selector provided.
 
-## Running unit tests
+## Languages Supported
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The project currently supports the following languages:
 
-## Running end-to-end tests
+- English
+- Serbian
+- Dutch
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Development
 
-## Further help
+If you want to run the project locally or contribute to its development, follow these steps:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Clone the repository:
+
+   ```bash
+   https://github.com/otaku0304/i18n-Angular-Built-In
+
+2. Install dependencies:
+   cd i18n-demo
+   npm install
+
+3. Start the development server: ng serve
+4. Access the application at http://localhost:4200 in your web browser.
+
+##Contact
+## Contact
+
+If you have any questions or suggestions, please feel free to [contact me](https://linktr.ee/MR_ASK_Chay).
+
+
