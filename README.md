@@ -31,7 +31,7 @@ If you want to run the project locally or contribute to its development, follow 
 1. Clone the repository:
 
    ```bash
-   https://github.com/otaku0304/i18n-Angular-Built-In
+    https://github.com/otaku0304/Internationalization.git
 
 2. Install dependencies:
    cd i18n-demo
