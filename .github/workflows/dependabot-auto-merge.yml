@@ -39,8 +39,12 @@ jobs:
         run: |
           pr_description="${{ env.PR_DESCRIPTION }}"
           # Remove HTML tags and extract compatibility score
-          compatibility_score=$(echo "$pr_description" | sed 's/<[^>]*>//g' | grep -oP 'Dependabot compatibility score\s*([\d.]+)' | awk '{print $NF}' || echo "null")
-          echo "Extracted compatibility score: $compatibility_score"
+          compatibility_score=$(echo "$pr_description" | sed 's/<[^>]*>//g' | grep -oP 'compatibility score:\s*\[\K\d+' || echo "null")
+          if [[ "$compatibility_score" == "null" ]]; then
+            echo "No compatibility score found, setting compatibility score to null."
+          else
+            echo "Extracted compatibility score: $compatibility_score"
+          fi
           echo "COMPATIBILITY_SCORE=$compatibility_score" >> $GITHUB_ENV  # Set the compatibility score as an environment variable
 
       - name: Check compatibility score and auto-merge
