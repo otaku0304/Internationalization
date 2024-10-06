@@ -34,22 +34,14 @@ jobs:
           echo "Pull request description: $pr_description"
           echo "PR_DESCRIPTION=$pr_description" >> $GITHUB_ENV  # Save PR description to environment variable
 
-      - name: Sanitize PR description
-        id: sanitize_description
-        run: |
-          sanitized_description=$(echo "${{ env.PR_DESCRIPTION }}" | sed 's/<[^>]*>//g')  # Remove HTML tags
-          echo "SANITIZED_DESCRIPTION=$sanitized_description" >> $GITHUB_ENV
-
       - name: Extract compatibility score from PR description
         id: extract_score
         run: |
-          pr_description="${{ env.SANITIZED_DESCRIPTION }}"
-          # Extract the compatibility score using grep
-          compatibility_score=$(echo "$pr_description" | grep -oP 'Dependabot compatibility score\s*([\d.]+)' | awk '{print $NF}' || echo "null")
+          pr_description="${{ env.PR_DESCRIPTION }}"
+          # Remove HTML tags and extract compatibility score
+          compatibility_score=$(echo "$pr_description" | sed 's/<[^>]*>//g' | grep -oP 'Dependabot compatibility score\s*([\d.]+)' | awk '{print $NF}' || echo "null")
           echo "Extracted compatibility score: $compatibility_score"
-          
-          # Set the compatibility score as an environment variable
-          echo "COMPATIBILITY_SCORE=$compatibility_score" >> $GITHUB_ENV
+          echo "COMPATIBILITY_SCORE=$compatibility_score" >> $GITHUB_ENV  # Set the compatibility score as an environment variable
 
       - name: Check compatibility score and auto-merge
         run: |
