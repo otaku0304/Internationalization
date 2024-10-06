@@ -30,20 +30,24 @@ jobs:
         id: get_pr_details
         run: |
           pr_url="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}"
+
+          # Extract title from PR details
           pr_title=$(curl -s "$pr_url" | jq -r '.title')
           echo "Pull request title: $pr_title"
-          echo "PR_TITLE=$pr_title" >> $GITHUB_ENV
+          echo "PR_TITLE=$pr_title" >> $GITHUB_ENV  # Save PR title to environment variable
 
-      - name: Extract parameters from PR title
-        id: extract_params
+      - name: Extract package manager, previous version, and new version from PR title
+        id: extract_details
         run: |
-          # Assuming the title format includes the necessary details
-          # For example: "Update karma to version 6.4.4 (previous: 6.4.2, package-manager: npm_and_yarn)"
-          
-          echo "$PR_TITLE" | grep -oP '(?<=package-manager: )\S+' > package_manager.txt
-          package_manager=$(< package_manager.txt)
-          previous_version=$(echo "$PR_TITLE" | grep -oP '(?<=previous: )\d+\.\d+\.\d+')
-          new_version=$(echo "$PR_TITLE" | grep -oP '(?<=version )\d+\.\d+\.\d+')
+          # Load PR title from environment
+          PR_TITLE="${{ env.PR_TITLE }}"
+
+          # Extract package manager if it exists, otherwise use a default (npm_and_yarn)
+          package_manager=$(echo "$PR_TITLE" | grep -oP '(?<=package-manager: )\S+' || echo "npm_and_yarn")
+
+          # Extract previous and new versions from the title
+          previous_version=$(echo "$PR_TITLE" | grep -oP '\d+\.\d+\.\d+' | head -n 1)
+          new_version=$(echo "$PR_TITLE" | grep -oP '\d+\.\d+\.\d+' | tail -n 1)
 
           echo "Extracted parameters:"
           echo "Package Manager: $package_manager"
@@ -55,20 +59,33 @@ jobs:
           echo "PREVIOUS_VERSION=$previous_version" >> $GITHUB_ENV
           echo "NEW_VERSION=$new_version" >> $GITHUB_ENV
 
-      - name: Make GET request to fetch compatibility score
-        id: fetch_score
+      - name: Generate compatibility score URL and request the score
+        id: request_compatibility_score
         run: |
-          # Construct the URL for the compatibility score request
-          compatibility_score_url="https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=karma&package-manager=${{ env.PACKAGE_MANAGER }}&previous-version=${{ env.PREVIOUS_VERSION }}&new-version=${{ env.NEW_VERSION }}"
+          # Generate the URL using extracted values
+          compatibility_url="https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=${{ github.event.pull_request.head.ref }}&package-manager=${{ env.PACKAGE_MANAGER }}&previous-version=${{ env.PREVIOUS_VERSION }}&new-version=${{ env.NEW_VERSION }}"
 
-          # Make a GET request to fetch the compatibility score
-          response=$(curl -s "$compatibility_score_url")
-          echo "Response: $response"
+          echo "Generated URL: $compatibility_url"
 
-          # Extract the compatibility score from the response
-          score=$(echo "$response" | jq -r '.score // "null"')
-          echo "Extracted compatibility score: $score"
-          echo "COMPATIBILITY_SCORE=$score" >> $GITHUB_ENV
+          # Make a request to fetch the compatibility score
+          compatibility_score=$(curl -s "$compatibility_url")
+          echo "Compatibility score response: $compatibility_score"
+
+          # Save the score to environment
+          echo "COMPATIBILITY_SCORE=$compatibility_score" >> $GITHUB_ENV
+
+      - name: Get existing Neon branch for this PR
+        id: get_existing_branch
+        run: |
+          branch_id="$(jq --raw-output '.branches[] | select(.name | startswith("PR #${{ github.event.pull_request.number }} ")) | .id' list-neon-branches-response.json)"
+          echo "Branch ID: $branch_id"
+          echo "branch_id=$branch_id" >> "$GITHUB_OUTPUT"
+
+          # Optionally handle if the branch_id is not found
+          if [ -z "$branch_id" ]; then
+            echo "No existing branch found for this PR."
+            exit 1
+          fi
 
       - name: Check compatibility score and auto-merge
         run: |
