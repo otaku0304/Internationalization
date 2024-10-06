@@ -32,20 +32,22 @@ jobs:
           pr_url="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}"
           pr_description=$(curl -s "$pr_url" | jq -r '.body')
           echo "Pull request description: $pr_description"
-          echo "::set-output name=pr_description::$pr_description"
+          echo "PR_DESCRIPTION=$pr_description" >> $GITHUB_ENV  # Save PR description to environment variable
 
       - name: Extract compatibility score from PR description
         id: extract_score
         run: |
-          pr_description="${{ steps.get_pr_details.outputs.pr_description }}"
+          pr_description="${{ env.PR_DESCRIPTION }}"
           # Extract the compatibility score using grep
           compatibility_score=$(echo "$pr_description" | grep -oP 'Dependabot compatibility score\s*([\d.]+)' | awk '{print $NF}' || echo "null")
           echo "Extracted compatibility score: $compatibility_score"
-          echo "::set-output name=compatibility_score::$compatibility_score"
+          
+          # Set the compatibility score as an environment variable
+          echo "COMPATIBILITY_SCORE=$compatibility_score" >> $GITHUB_ENV
 
       - name: Check compatibility score and auto-merge
         run: |
-          if [[ "${{ steps.extract_score.outputs.compatibility_score }}" == "100" ]]; then
+          if [[ "$COMPATIBILITY_SCORE" == "100" ]]; then
             echo "Compatibility score is 100%, auto-merging..."
             gh pr merge ${{ github.event.pull_request.number }} --auto --squash --delete-branch
           else
