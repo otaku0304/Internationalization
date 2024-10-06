@@ -34,6 +34,14 @@ jobs:
       - name: Set Google Application Credentials
         run: echo "GOOGLE_APPLICATION_CREDENTIALS=service-account.json" >> $GITHUB_ENV
 
+      - name: Set Firebase project
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/dev" ]; then
+            firebase use dev
+          elif [ "${{ github.ref }}" == "refs/heads/master" ]; then
+            firebase use prod
+          fi
+
       - name: Deploy to Firebase Hosting
         run: |
           if [ "${{ github.ref }}" == "refs/heads/dev" ]; then
