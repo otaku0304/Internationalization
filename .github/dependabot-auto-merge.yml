@@ -9,13 +9,13 @@ on:
 jobs:
   auto-merge:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'  # Trigger only for Dependabot PRs
+    if: github.actor == 'dependabot[bot]' && github.event.pull_request.base.ref == 'dev'
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Get Dependabot compatibility score
+    - name: Get pull request details
       run: |
         pr_url="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}"
         compatibility_score=$(curl -s "$pr_url" | jq -r '.head.repo.compatibility_score')
