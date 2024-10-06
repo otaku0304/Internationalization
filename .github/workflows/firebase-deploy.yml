@@ -3,8 +3,8 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - dev  # Trigger the workflow on pushes to the dev branch
-      - master  # Trigger the workflow on pushes to the master branch
+      - dev    # Trigger the workflow on pushes to the dev branch
+      - master # Trigger the workflow on pushes to the master branch
 
 jobs:
   deploy:
@@ -33,7 +33,8 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}  # Add your Firebase token as a secret
         run: |
           if [ "${{ github.ref }}" == "refs/heads/dev" ]; then
-            firebase deploy --project internationalization-d2aa6-93dd6 --only hosting
+            firebase deploy --only hosting:dev  # Deploy to the 'dev' target
           elif [ "${{ github.ref }}" == "refs/heads/master" ]; then
-            firebase deploy --project internationalization-d2aa6 --only hosting
+            firebase deploy --only hosting:prod  # Deploy to the 'prod' target
           fi
+
