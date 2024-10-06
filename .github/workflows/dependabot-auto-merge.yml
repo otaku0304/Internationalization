@@ -5,8 +5,6 @@ on:
     types:
       - opened
       - synchronize
-  schedule:
-    - cron: '*/1 * * * *'  # This cron expression runs every minute
 
 jobs:
   auto-merge:
@@ -17,10 +15,10 @@ jobs:
         run: |
           pr_count=$(curl -s "https://api.github.com/repos/${{ github.repository }}/pulls?state=open&base=dev" | jq '. | length')
           echo "Open PR count targeting dev branch: $pr_count"
-          echo "pr_count=$pr_count" >> $GITHUB_ENV  # Use environment files instead of set-output
+          echo "::set-output name=pr_count::$pr_count"
 
       - name: Exit if no open PRs
-        if: env.pr_count == '0'
+        if: steps.check_open_prs.outputs.pr_count == '0'
         run: |
           echo "No open PRs targeting dev branch. Exiting workflow."
           exit 0
@@ -32,15 +30,22 @@ jobs:
         id: get_pr_details
         run: |
           pr_url="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}"
-          pr_response=$(curl -s "$pr_url")
-          echo "Pull Request details: $pr_response"
-          compatibility_score=$(echo "$pr_response" | jq -r '.head.repo.compatibility_score')
-          echo "Compatibility score is $compatibility_score"
-          echo "compatibility_score=$compatibility_score" >> $GITHUB_ENV  # Use environment files
+          pr_description=$(curl -s "$pr_url" | jq -r '.body')
+          echo "Pull request description: $pr_description"
+          echo "::set-output name=pr_description::$pr_description"
+
+      - name: Extract compatibility score from PR description
+        id: extract_score
+        run: |
+          pr_description="${{ steps.get_pr_details.outputs.pr_description }}"
+          # Extract the compatibility score using grep
+          compatibility_score=$(echo "$pr_description" | grep -oP 'Dependabot compatibility score\s*([\d.]+)' | awk '{print $NF}' || echo "null")
+          echo "Extracted compatibility score: $compatibility_score"
+          echo "::set-output name=compatibility_score::$compatibility_score"
 
       - name: Check compatibility score and auto-merge
         run: |
-          if [[ "${{ env.compatibility_score }}" == "100" ]]; then
+          if [[ "${{ steps.extract_score.outputs.compatibility_score }}" == "100" ]]; then
             echo "Compatibility score is 100%, auto-merging..."
             gh pr merge ${{ github.event.pull_request.number }} --auto --squash --delete-branch
           else
