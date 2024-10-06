@@ -38,10 +38,8 @@ jobs:
         run: |
           if [ "${{ github.ref }}" == "refs/heads/dev" ]; then
             echo "Deploying to dev..."
-            firebase use dev  # Set the dev project alias as active
-            firebase deploy --only hosting:dev --project internationalization-d2aa6
+            firebase deploy --only hosting:dev
           elif [ "${{ github.ref }}" == "refs/heads/master" ]; then
             echo "Deploying to prod..."
-            firebase use prod  # Set the prod project alias as active
-            firebase deploy --only hosting:prod --project internationalization-d2aa6
+            firebase deploy --only hosting:prod
           fi
