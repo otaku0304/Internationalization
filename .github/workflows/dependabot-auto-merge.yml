@@ -30,23 +30,37 @@ jobs:
         id: get_pr_details
         run: |
           pr_url="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}"
-          pr_description=$(curl -s "$pr_url" | jq -r '.body')
-          echo "Pull request description: $pr_description"
-          echo "PR_DESCRIPTION=$pr_description" >> $GITHUB_ENV
+          pr_title=$(curl -s "$pr_url" | jq -r '.title')
+          echo "Pull request title: $pr_title"
+          echo "PR_TITLE=$pr_title" >> $GITHUB_ENV
 
-      - name: Extract compatibility score URL from PR description
-        id: extract_url
+      - name: Extract parameters from PR title
+        id: extract_params
         run: |
-          # Extract the URL from the PR description
-          compatibility_score_url=$(echo "${{ env.PR_DESCRIPTION }}" | grep -oP '(?<=\()\S+(?=\))')
-          echo "Extracted compatibility score URL: $compatibility_score_url"
-          echo "COMPATIBILITY_SCORE_URL=$compatibility_score_url" >> $GITHUB_ENV
+          # Assuming the title format includes the necessary details
+          # For example: "Update karma to version 6.4.4 (previous: 6.4.2, package-manager: npm_and_yarn)"
+          
+          echo "$PR_TITLE" | grep -oP '(?<=package-manager: )\S+' > package_manager.txt
+          package_manager=$(< package_manager.txt)
+          previous_version=$(echo "$PR_TITLE" | grep -oP '(?<=previous: )\d+\.\d+\.\d+')
+          new_version=$(echo "$PR_TITLE" | grep -oP '(?<=version )\d+\.\d+\.\d+')
 
-      - name: Make GET request to extract compatibility score
+          echo "Extracted parameters:"
+          echo "Package Manager: $package_manager"
+          echo "Previous Version: $previous_version"
+          echo "New Version: $new_version"
+
+          # Set extracted values as output variables
+          echo "PACKAGE_MANAGER=$package_manager" >> $GITHUB_ENV
+          echo "PREVIOUS_VERSION=$previous_version" >> $GITHUB_ENV
+          echo "NEW_VERSION=$new_version" >> $GITHUB_ENV
+
+      - name: Make GET request to fetch compatibility score
         id: fetch_score
         run: |
-          compatibility_score_url="${{ env.COMPATIBILITY_SCORE_URL }}"
-          
+          # Construct the URL for the compatibility score request
+          compatibility_score_url="https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=karma&package-manager=${{ env.PACKAGE_MANAGER }}&previous-version=${{ env.PREVIOUS_VERSION }}&new-version=${{ env.NEW_VERSION }}"
+
           # Make a GET request to fetch the compatibility score
           response=$(curl -s "$compatibility_score_url")
           echo "Response: $response"
