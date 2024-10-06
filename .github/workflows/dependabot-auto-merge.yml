@@ -34,26 +34,27 @@ jobs:
           echo "Pull request description: $pr_description"
           echo "PR_DESCRIPTION=$pr_description" >> $GITHUB_ENV
 
-      - name: Extract compatibility score from PR description
-        id: extract_score
+      - name: Extract compatibility score URL from PR description
+        id: extract_url
         run: |
-          pr_description="${{ env.PR_DESCRIPTION }}"
-          compatibility_score=$(echo "$pr_description" | sed 's/<[^>]*>//g' | grep -oP 'Dependabot compatibility score\s*([\d.]+)' | awk '{print $NF}' || echo "null")
-          echo "Extracted compatibility score: $compatibility_score"
-          echo "COMPATIBILITY_SCORE=$compatibility_score" >> $GITHUB_ENV
+          # Extract the URL from the PR description
+          compatibility_score_url=$(echo "${{ env.PR_DESCRIPTION }}" | grep -oP '(?<=\()\S+(?=\))')
+          echo "Extracted compatibility score URL: $compatibility_score_url"
+          echo "COMPATIBILITY_SCORE_URL=$compatibility_score_url" >> $GITHUB_ENV
 
-      - name: Get existing Neon branch for this PR
-        id: get-existing-branch
+      - name: Make GET request to extract compatibility score
+        id: fetch_score
         run: |
-          branch_id="$(jq --raw-output '.branches[] | select(.name | startswith("PR #${{ github.event.pull_request.number }} ")) | .id' list-neon-branches-response.json)"
-          echo "Branch ID: $branch_id"
-          echo "branch_id=$branch_id" >> "$GITHUB_OUTPUT"
+          compatibility_score_url="${{ env.COMPATIBILITY_SCORE_URL }}"
           
-          # Optionally handle if the branch_id is not found
-          if [ -z "$branch_id" ]; then
-            echo "No existing branch found for this PR."
-            exit 1
-          fi
+          # Make a GET request to fetch the compatibility score
+          response=$(curl -s "$compatibility_score_url")
+          echo "Response: $response"
+
+          # Extract the compatibility score from the response
+          score=$(echo "$response" | jq -r '.score // "null"')
+          echo "Extracted compatibility score: $score"
+          echo "COMPATIBILITY_SCORE=$score" >> $GITHUB_ENV
 
       - name: Check compatibility score and auto-merge
         run: |
