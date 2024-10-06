@@ -9,27 +9,38 @@ on:
 jobs:
   auto-merge:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]' && github.event.pull_request.base.ref == 'dev'
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Check for existing open PRs
+        id: check_open_prs
+        run: |
+          pr_count=$(curl -s "https://api.github.com/repos/${{ github.repository }}/pulls?state=open&base=dev" | jq '. | length')
+          echo "Open PR count targeting dev branch: $pr_count"
+          echo "::set-output name=pr_count::$pr_count"
 
-    - name: Get pull request details
-      id: get_pr_details
-      run: |
-        pr_url="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}"
-        compatibility_score=$(curl -s "$pr_url" | jq -r '.head.repo.compatibility_score')
-        echo "Compatibility score is $compatibility_score"
-        echo "::set-output name=compatibility_score::$compatibility_score"
+      - name: Exit if no open PRs
+        if: steps.check_open_prs.outputs.pr_count == '0'
+        run: |
+          echo "No open PRs targeting dev branch. Exiting workflow."
+          exit 0
 
-    - name: Check compatibility score and auto-merge
-      run: |
-        if [[ "${{ steps.get_pr_details.outputs.compatibility_score }}" == "100" ]]; then
-          echo "Compatibility score is 100%, auto-merging..."
-          gh pr merge ${{ github.event.pull_request.number }} --auto --squash --delete-branch
-        else
-          echo "Compatibility score is not 100%, skipping auto-merge."
-        fi
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get pull request details
+        id: get_pr_details
+        run: |
+          pr_url="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}"
+          compatibility_score=$(curl -s "$pr_url" | jq -r '.head.repo.compatibility_score')
+          echo "Compatibility score is $compatibility_score"
+          echo "::set-output name=compatibility_score::$compatibility_score"
+
+      - name: Check compatibility score and auto-merge
+        run: |
+          if [[ "${{ steps.get_pr_details.outputs.compatibility_score }}" == "100" ]]; then
+            echo "Compatibility score is 100%, auto-merging..."
+            gh pr merge ${{ github.event.pull_request.number }} --auto --squash --delete-branch
+          else
+            echo "Compatibility score is not 100%, skipping auto-merge."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
