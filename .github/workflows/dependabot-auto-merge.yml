@@ -36,25 +36,30 @@ jobs:
           echo "Pull request title: $pr_title"
           echo "PR_TITLE=$pr_title" >> $GITHUB_ENV  # Save PR title to environment variable
 
-      - name: Extract package manager, previous version, and new version from PR title
+      - name: Extract package name, package manager, previous version, and new version from PR title
         id: extract_details
         run: |
           # Load PR title from environment
           PR_TITLE="${{ env.PR_TITLE }}"
 
-          # Extract package manager if it exists, otherwise use a default (npm_and_yarn)
-          package_manager=$(echo "$PR_TITLE" | grep -oP '(?<=package-manager: )\S+' || echo "npm_and_yarn")
+          # Extract package name by removing branch prefixes (like 'dependabot/npm_and_yarn/dev/')
+          package_name=$(echo "$PR_TITLE" | sed -E 's/.*\/([^/]+)-[0-9]+\.[0-9]+\.[0-9]+.*/\1/')
+
+          # Extract package manager (using default as npm_and_yarn)
+          package_manager="npm_and_yarn"
 
           # Extract previous and new versions from the title
           previous_version=$(echo "$PR_TITLE" | grep -oP '\d+\.\d+\.\d+' | head -n 1)
           new_version=$(echo "$PR_TITLE" | grep -oP '\d+\.\d+\.\d+' | tail -n 1)
 
           echo "Extracted parameters:"
+          echo "Package Name: $package_name"
           echo "Package Manager: $package_manager"
           echo "Previous Version: $previous_version"
           echo "New Version: $new_version"
 
           # Set extracted values as output variables
+          echo "PACKAGE_NAME=$package_name" >> $GITHUB_ENV
           echo "PACKAGE_MANAGER=$package_manager" >> $GITHUB_ENV
           echo "PREVIOUS_VERSION=$previous_version" >> $GITHUB_ENV
           echo "NEW_VERSION=$new_version" >> $GITHUB_ENV
@@ -63,7 +68,7 @@ jobs:
         id: request_compatibility_score
         run: |
           # Generate the URL using extracted values
-          compatibility_url="https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=${{ github.event.pull_request.head.ref }}&package-manager=${{ env.PACKAGE_MANAGER }}&previous-version=${{ env.PREVIOUS_VERSION }}&new-version=${{ env.NEW_VERSION }}"
+          compatibility_url="https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=${{ env.PACKAGE_NAME }}&package-manager=${{ env.PACKAGE_MANAGER }}&previous-version=${{ env.PREVIOUS_VERSION }}&new-version=${{ env.NEW_VERSION }}"
 
           echo "Generated URL: $compatibility_url"
 
@@ -85,7 +90,6 @@ jobs:
           if [ -z "$branch_id" ]; then
             echo "No existing branch found for this PR."
             exit 1
-          fi
 
       - name: Check compatibility score and auto-merge
         run: |
