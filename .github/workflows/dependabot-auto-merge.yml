@@ -42,11 +42,11 @@ jobs:
           # Load PR title from environment
           PR_TITLE="${{ env.PR_TITLE }}"
 
-          # Extract package name by removing branch prefixes (like 'dependabot/npm_and_yarn/dev/')
-          package_name=$(echo "$PR_TITLE" | sed -E 's/.*\/([^/]+)-[0-9]+\.[0-9]+\.[0-9]+.*/\1/')
+          # Extract package name (second word from title)
+          package_name=$(echo "$PR_TITLE" | awk '{print $2}')
 
-          # Extract package manager (using default as npm_and_yarn)
-          package_manager="npm_and_yarn"
+          # Extract package manager if it exists, otherwise use a default (npm_and_yarn)
+          package_manager=$(echo "$PR_TITLE" | grep -oP '(?<=package-manager: )\S+' || echo "npm_and_yarn")
 
           # Extract previous and new versions from the title
           previous_version=$(echo "$PR_TITLE" | grep -oP '\d+\.\d+\.\d+' | head -n 1)
@@ -78,18 +78,6 @@ jobs:
 
           # Save the score to environment
           echo "COMPATIBILITY_SCORE=$compatibility_score" >> $GITHUB_ENV
-
-      - name: Get existing Neon branch for this PR
-        id: get_existing_branch
-        run: |
-          branch_id="$(jq --raw-output '.branches[] | select(.name | startswith("PR #${{ github.event.pull_request.number }} ")) | .id' list-neon-branches-response.json)"
-          echo "Branch ID: $branch_id"
-          echo "branch_id=$branch_id" >> "$GITHUB_OUTPUT"
-
-          # Optionally handle if the branch_id is not found
-          if [ -z "$branch_id" ]; then
-            echo "No existing branch found for this PR."
-            exit 1
 
       - name: Check compatibility score and auto-merge
         run: |
