@@ -30,21 +30,36 @@ jobs:
         id: get_pr_details
         run: |
           pr_url="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}"
+
+          # Extract title from PR details
           pr_title=$(curl -s "$pr_url" | jq -r '.title')
           echo "Pull request title: $pr_title"
-          echo "PR_TITLE=$pr_title" >> $GITHUB_ENV
+          echo "PR_TITLE=$pr_title" >> $GITHUB_ENV  # Save PR title to environment variable
 
-      - name: Extract package manager, previous version, and new version from PR title
+      - name: Extract package name, package manager, previous version, and new version from PR title
         id: extract_details
         run: |
+          # Load PR title from environment
           PR_TITLE="${{ env.PR_TITLE }}"
+
+          # Extract package name (second word from title)
+          package_name=$(echo "$PR_TITLE" | awk '{print $2}')
+
+          # Extract package manager if it exists, otherwise use a default (npm_and_yarn)
           package_manager=$(echo "$PR_TITLE" | grep -oP '(?<=package-manager: )\S+' || echo "npm_and_yarn")
+
+          # Extract previous and new versions from the title
           previous_version=$(echo "$PR_TITLE" | grep -oP '\d+\.\d+\.\d+' | head -n 1)
           new_version=$(echo "$PR_TITLE" | grep -oP '\d+\.\d+\.\d+' | tail -n 1)
+
           echo "Extracted parameters:"
+          echo "Package Name: $package_name"
           echo "Package Manager: $package_manager"
           echo "Previous Version: $previous_version"
           echo "New Version: $new_version"
+
+          # Set extracted values as output variables
+          echo "PACKAGE_NAME=$package_name" >> $GITHUB_ENV
           echo "PACKAGE_MANAGER=$package_manager" >> $GITHUB_ENV
           echo "PREVIOUS_VERSION=$previous_version" >> $GITHUB_ENV
           echo "NEW_VERSION=$new_version" >> $GITHUB_ENV
@@ -52,23 +67,25 @@ jobs:
       - name: Generate compatibility score URL and request the score
         id: request_compatibility_score
         run: |
-          compatibility_url="https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=${{ github.event.pull_request.head.ref }}&package-manager=${{ env.PACKAGE_MANAGER }}&previous-version=${{ env.PREVIOUS_VERSION }}&new-version=${{ env.NEW_VERSION }}"
+          # Generate the URL using extracted values
+          compatibility_url="https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=${{ env.PACKAGE_NAME }}&package-manager=${{ env.PACKAGE_MANAGER }}&previous-version=${{ env.PREVIOUS_VERSION }}&new-version=${{ env.NEW_VERSION }}"
+
           echo "Generated URL: $compatibility_url"
-          compatibility_score_svg=$(curl -s "$compatibility_url")
-          
-          # Extract the compatibility score from the SVG response
-          compatibility_score=$(echo "$compatibility_score_svg" | grep -oP '(?<=<title>compatibility: )\d+')
-          echo "Compatibility score: $compatibility_score"
-          
-          # Set the extracted score as an environment variable
+
+          # Make a request to fetch the compatibility score
+          compatibility_score=$(curl -s "$compatibility_url")
+          echo "Compatibility score response: $compatibility_score"
+
+          # Save the score to environment
           echo "COMPATIBILITY_SCORE=$compatibility_score" >> $GITHUB_ENV
 
       - name: Check compatibility score and auto-merge
         run: |
-          if [[ "$COMPATIBILITY_SCORE" -eq "100" ]]; then
+          if [[ "$COMPATIBILITY_SCORE" == "100" ]]; then
             echo "Compatibility score is 100%, auto-merging..."
             gh pr merge ${{ github.event.pull_request.number }} --auto --squash --delete-branch
           else
             echo "Compatibility score is not 100%, skipping auto-merge."
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
