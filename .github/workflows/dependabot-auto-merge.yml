@@ -16,14 +16,16 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Get pull request details
+      id: get_pr_details
       run: |
         pr_url="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}"
         compatibility_score=$(curl -s "$pr_url" | jq -r '.head.repo.compatibility_score')
         echo "Compatibility score is $compatibility_score"
+        echo "::set-output name=compatibility_score::$compatibility_score"
 
     - name: Check compatibility score and auto-merge
       run: |
-        if [[ $compatibility_score == "100" ]]; then
+        if [[ "${{ steps.get_pr_details.outputs.compatibility_score }}" == "100" ]]; then
           echo "Compatibility score is 100%, auto-merging..."
           gh pr merge ${{ github.event.pull_request.number }} --auto --squash --delete-branch
         else
