@@ -10,53 +10,50 @@ jobs:
   auto-merge:
     runs-on: ubuntu-latest
     steps:
+      - name: Check for existing open PRs
+        id: check_open_prs
+        run: |
+          pr_count=$(curl -s "https://api.github.com/repos/${{ github.repository }}/pulls?state=open&base=dev" | jq '. | length')
+          echo "Open PR count targeting dev branch: $pr_count"
+          echo "pr_count=$pr_count" >> "$GITHUB_OUTPUT"
+
+      - name: Exit if no open PRs
+        if: steps.check_open_prs.outputs.pr_count == '0'
+        run: |
+          echo "No open PRs targeting dev branch. Exiting workflow."
+          exit 0
+
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Get pull request details
         id: get_pr_details
         run: |
-          # Get the PR description using GitHub API
           pr_url="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}"
           pr_description=$(curl -s "$pr_url" | jq -r '.body')
-          echo "PR_DESCRIPTION=$pr_description" >> $GITHUB_ENV  # Save PR description to environment variable
+          echo "Pull request description: $pr_description"
+          echo "PR_DESCRIPTION=$pr_description" >> $GITHUB_ENV
 
-      - name: Extract compatibility score badge URL
-        id: extract_badge_url
+      - name: Extract compatibility score from PR description
+        id: extract_score
         run: |
-          # Extract the URL of the compatibility score badge from the PR description
-          badge_url=$(echo "${{ env.PR_DESCRIPTION }}" | grep -oP 'https://dependabot-badges\.githubapp\.com/badges/compatibility_score\?[^"]+')
-          echo "Extracted badge URL: $badge_url"
-          echo "BADGE_URL=$badge_url" >> $GITHUB_ENV  # Save badge URL to environment variable
-
-      - name: Check compatibility score based on URL
-        id: check_score
-        run: |
-          badge_url="${{ env.BADGE_URL }}"
-          # Example logic to derive compatibility score based on URL
-          # Extract versions from the URL
-          if [[ "$badge_url" =~ previous-version=([0-9\.]+) ]]; then
-            previous_version="${BASH_REMATCH[1]}"
-          fi
-          if [[ "$badge_url" =~ new-version=([0-9\.]+) ]]; then
-            new_version="${BASH_REMATCH[1]}"
-          fi
-
-          echo "Previous version: $previous_version"
-          echo "New version: $new_version"
-
-          # Logic to determine compatibility score based on version differences
-          # This is just an example; modify according to your actual score criteria
-          if [[ "$new_version" == "0.13.3" ]]; then
-            compatibility_score="100"
-          elif [[ "$new_version" == "0.13.2" ]]; then
-            compatibility_score="90"
-          else
-            compatibility_score="null"
-          fi
-
+          pr_description="${{ env.PR_DESCRIPTION }}"
+          compatibility_score=$(echo "$pr_description" | sed 's/<[^>]*>//g' | grep -oP 'Dependabot compatibility score\s*([\d.]+)' | awk '{print $NF}' || echo "null")
           echo "Extracted compatibility score: $compatibility_score"
-          echo "COMPATIBILITY_SCORE=$compatibility_score" >> $GITHUB_ENV  # Save compatibility score
+          echo "COMPATIBILITY_SCORE=$compatibility_score" >> $GITHUB_ENV
+
+      - name: Get existing Neon branch for this PR
+        id: get-existing-branch
+        run: |
+          branch_id="$(jq --raw-output '.branches[] | select(.name | startswith("PR #${{ github.event.pull_request.number }} ")) | .id' list-neon-branches-response.json)"
+          echo "Branch ID: $branch_id"
+          echo "branch_id=$branch_id" >> "$GITHUB_OUTPUT"
+          
+          # Optionally handle if the branch_id is not found
+          if [ -z "$branch_id" ]; then
+            echo "No existing branch found for this PR."
+            exit 1
+          fi
 
       - name: Check compatibility score and auto-merge
         run: |
