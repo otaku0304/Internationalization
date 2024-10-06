@@ -5,6 +5,8 @@ on:
     types:
       - opened
       - synchronize
+  schedule:
+    - cron: '*/1 * * * *'  # This cron expression runs every minute
 
 jobs:
   auto-merge:
