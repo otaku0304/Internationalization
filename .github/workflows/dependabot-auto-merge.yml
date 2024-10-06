@@ -69,12 +69,23 @@ jobs:
         run: |
           # Generate the URL using extracted values
           compatibility_url="https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=${{ env.PACKAGE_NAME }}&package-manager=${{ env.PACKAGE_MANAGER }}&previous-version=${{ env.PREVIOUS_VERSION }}&new-version=${{ env.NEW_VERSION }}"
-
+          
           echo "Generated URL: $compatibility_url"
 
-          # Make a request to fetch the compatibility score
-          compatibility_score=$(curl -s "$compatibility_url")
-          echo "Compatibility score response: $compatibility_score"
+          # Fetch the SVG response
+          svg_response=$(curl -s "$compatibility_url")
+          echo "SVG Response: $svg_response"
+
+          # Extract the percentage from the <title> tag in the SVG response
+          compatibility_score=$(echo "$svg_response" | grep -oP '(?<=<title>compatibility: )\d+(?=%</title>)')
+
+          # If the compatibility score is not found, set a default or handle error
+          if [[ -z "$compatibility_score" ]]; then
+            echo "Unable to extract compatibility score. Defaulting to 0."
+            compatibility_score=0
+          fi
+
+          echo "Extracted Compatibility Score: $compatibility_score"
 
           # Save the score to environment
           echo "COMPATIBILITY_SCORE=$compatibility_score" >> $GITHUB_ENV
