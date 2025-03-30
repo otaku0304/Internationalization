@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'app-feedback',
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.scss'],
+  standalone: false
 })
 export class FeedbackComponent {
   name = 'Feedback';
@@ -12,7 +13,7 @@ export class FeedbackComponent {
   emailField: FormControl;
   feedbackField: FormControl;
 
-  constructor(private snackBar: MatSnackBar) {
+  constructor(private readonly snackBar: MatSnackBar) {
     this.emailField = new FormControl('', [
       Validators.required,
       Validators.email,
