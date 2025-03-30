@@ -31,7 +31,7 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
             "outputPath": "dist/internationalization",
             "index": "src/index.html",
@@ -42,7 +42,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/internationalization.png",
+              "src/internationalization.webp",
               "src/assets"
             ],
             "styles": [
@@ -98,19 +98,19 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "internationalization:build:production"
+              "buildTarget": "internationalization:build:production"
             },
             "development": {
-              "browserTarget": "internationalization:build:development"
+              "buildTarget": "internationalization:build:development"
             },
             "en": {
-              "browserTarget": "i18n:build:en"
+              "buildTarget": "internationalization:build:en"
             },
             "nl": {
-              "browserTarget": "i18n:build:nl"
+              "buildTarget": "internationalization:build:nl"
             },
             "sr": {
-              "browserTarget": "i18n:build:sr"
+              "buildTarget": "internationalization:build:sr"
             }
           },
           "defaultConfiguration": "development"
@@ -118,7 +118,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "internationalization:build"
+            "buildTarget": "internationalization:build"
           }
         },
         "test": {
@@ -131,7 +131,7 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/internationalization.png",
+              "src/internationalization.webp",
               "src/assets"
             ],
             "styles": [
