@@ -42,7 +42,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/internationalization.png",
+              "src/internationalization.webp",
               "src/assets"
             ],
             "styles": [
@@ -131,7 +131,7 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/internationalization.png",
+              "src/internationalization.webp",
               "src/assets"
             ],
             "styles": [
