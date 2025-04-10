@@ -1,23 +1,10 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from './i18n/navbar/navbar.component';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { RouterModule, RouterOutlet } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: true,
-  imports: [
-    NavbarComponent,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    RouterModule,
-    RouterOutlet,
-  ],
+  standalone: false
 })
 export class AppComponent {
   currentYear: number = new Date().getFullYear();

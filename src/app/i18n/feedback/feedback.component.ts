@@ -1,37 +1,11 @@
 import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  Validators,
-  ReactiveFormsModule
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  Firestore,
-  collection,
-  addDoc,
-  serverTimestamp,
-} from '@angular/fire/firestore';
-import { CommonModule } from '@angular/common';
-import { MatError, MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatError,
-    MatFormFieldModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
-  ],
+  standalone: false
 })
 export class FeedbackComponent {
   name = 'Feedback';
@@ -39,10 +13,7 @@ export class FeedbackComponent {
   emailField: FormControl;
   feedbackField: FormControl;
 
-  constructor(
-    private readonly snackBar: MatSnackBar,
-    private readonly firestore: Firestore
-  ) {
+  constructor(private readonly snackBar: MatSnackBar) {
     this.emailField = new FormControl('', [
       Validators.required,
       Validators.email,
@@ -81,36 +52,11 @@ export class FeedbackComponent {
     return '';
   }
 
-  async onSubmit() {
-    console.log('Form submitted:', this.formGroup.value);
-    console.log('Email:', this.emailField.value);
-    console.log('Feedback:', this.feedbackField.value);
-    console.log('Form Valid:', this.formGroup.valid);
-    if (this.formGroup.valid) {
-      console.log('Form is valid, submitting feedback...');
-      const feedbacksCollection = collection(this.firestore, 'feedbacks');
-
-      const feedbackData = {
-        email: this.emailField.value,
-        feedback: this.feedbackField.value,
-        timestamp: serverTimestamp(),
-      };
-
-      try {
-        console.log('Adding feedback to Firestore:', feedbackData);
-        await addDoc(feedbacksCollection, feedbackData);
-        this.formGroup.reset();
-        this.snackBar.open('Feedback Submitted Successfully', 'Close', {
-          duration: 3000,
-          verticalPosition: 'bottom',
-        });
-      } catch (error) {
-        console.error('Error submitting feedback:', error);
-        this.snackBar.open('Error submitting feedback', 'Close', {
-          duration: 3000,
-          verticalPosition: 'bottom',
-        });
-      }
-    }
+  onSubmit() {
+    this.formGroup.reset();
+    this.snackBar.open('Feedback Submitted Successfully', 'Close', {
+      duration: 3000, 
+      verticalPosition: 'bottom',
+    });
   }
 }
