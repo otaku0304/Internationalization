@@ -11,6 +11,7 @@ import {
   Location,
   LocationStrategy,
 } from '@angular/common';
+import '@angular/localize/init';
 
 bootstrapApplication(AppComponent, {
   providers: [
