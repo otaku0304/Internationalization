@@ -5,9 +5,10 @@ import { Router } from '@angular/router';
   selector: 'app-not-found',
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.scss'],
+  standalone: true
 })
 export class NotFoundComponent {
-  constructor(private router: Router) {}
+  constructor(private readonly router: Router) {}
   home() {
     this.router.navigate(['/']);
   }
