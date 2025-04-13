@@ -1,16 +1,50 @@
 {
-  "hosting": {
-    "public": "dist/internationalization",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
+  "hosting": [
+    {
+      "target": "dev",
+      "public": "dist/internationalization",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "/en/**",
+          "destination": "/en/index.html"
+        },
+        {
+          "source": "/nl/**",
+          "destination": "/nl/index.html"
+        },
+        {
+          "source": "/sr/**",
+          "destination": "/sr/index.html"
+        },
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "target": "prod",
+      "public": "dist/internationalization",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "/en/**",
+          "destination": "/en/index.html"
+        },
+        {
+          "source": "/nl/**",
+          "destination": "/nl/index.html"
+        },
+        {
+          "source": "/sr/**",
+          "destination": "/sr/index.html"
+        },
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
 }

@@ -1,5 +1,20 @@
 {
   "projects": {
-    "default": "internationalization-d2aa6"
-  }
+    "default": "internationalization-d2aa6",
+    "dev": "internationalization-d2aa6-93dd6",
+    "prod": "internationalization-d2aa6"
+  },
+  "targets": {
+    "internationalization-d2aa6": {
+      "hosting": {
+        "dev": [
+          "internationalization-d2aa6-93dd6"
+        ],
+        "prod": [
+          "internationalization-d2aa6"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
