@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   development: true,
-  local: true,
+  local: false,
   pdfPasswordRemover:"https://pdf-password-remover-angular.onrender.com",
   firebaseConfig: {
     apiKey: 'AIzaSyDSAy5bxFPQdGc8tTSb60B8DVZBC-Z2M00',
