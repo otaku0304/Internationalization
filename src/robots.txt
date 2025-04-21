@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://internationalization-d2aa6.firebaseapp.com/en/assets/sitemap.xml
