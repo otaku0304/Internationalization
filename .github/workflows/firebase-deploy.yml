@@ -40,7 +40,7 @@ jobs:
             echo "Deploying to dev..."
             firebase use internationalization-d2aa6  # Use the dev alias
             firebase deploy --only hosting:dev
-          elif [ "${{ github.ref }}" == "refs/heads/master" ]; then
+          elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
             echo "Deploying to prod..."
             firebase use internationalization-d2aa6  # Use the prod alias
             firebase deploy --only hosting:prod

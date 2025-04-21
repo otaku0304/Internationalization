@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AppConfig } from 'src/app/core/config/app.Config';
 
 @Component({
   selector: 'app-navbar',
@@ -8,4 +9,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   standalone: true,
   imports: [RouterLinkActive, RouterLink],
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  private readonly navigateToPdfPasswordRemover = AppConfig.pdfPasswordRemover();
+
+  navigateToPdfPwdRmv() {
+    window.location.href = `${this.navigateToPdfPasswordRemover}`;
+  }
+}
