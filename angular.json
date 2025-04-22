@@ -42,8 +42,7 @@
             "assets": [
               "src/internationalization.webp",
               "src/assets",
-              "src/googlef71993b736a91d1d.html",
-              "src/BingSiteAuth.xml"
+              "src/googlef71993b736a91d1d.html"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
