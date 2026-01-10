@@ -27,11 +27,24 @@ jobs:
         # This builds all locales into the output directory
         run: npm run build -- --localize
 
+      - name: Decode Service Account
+        id: decode_sa
+        run: |
+          echo "decoded_json<<EOF" >> $GITHUB_OUTPUT
+          if echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" | grep -q "^ewog"; then
+            echo "Decoding Base64 service account..."
+            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" | base64 --decode >> $GITHUB_OUTPUT
+          else
+            echo "Service account is already raw JSON."
+            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" >> $GITHUB_OUTPUT
+          fi
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}'
+          firebaseServiceAccount: '${{ steps.decode_sa.outputs.decoded_json }}'
           # Use 'dev' target for dev branch, 'prod' target for main branch
           target: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
           channelId: live
