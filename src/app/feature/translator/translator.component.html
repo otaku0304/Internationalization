@@ -1,64 +1,109 @@
-<div class="translator-container">
-  <header>
-    <div>
-      <h1>Translation Studio</h1>
-      <p>Native Angular i18n Crowdsourcing Platform</p>
-    </div>
-  </header>
-
-  <div class="controls">
-    <div class="search-box">
-      <input type="text" placeholder="Search keys or text..." (input)="updateSearch($event)" [value]="searchQuery()">
+<div class="studio-wrapper">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo-section">
+      <h2>Studio.</h2>
+      <p>Native Localization Hub</p>
     </div>
 
-    <div class="language-selector">
-      <select [ngModel]="activeLang" (ngModelChange)="activeLang = $event">
-        <option *ngFor="let lang of languages" [value]="lang.code">
-          {{ lang.name }} ({{ lang.code | uppercase }})
-        </option>
-      </select>
-    </div>
-
-    <button type="button" (click)="showAddLang = !showAddLang">
-      <span>+ Add Language</span>
-    </button>
-
-    <div class="export-group">
-      <button type="button" class="primary" (click)="exportXliff()">
-        <span>Export XLIFF</span>
-      </button>
-      <button type="button" class="secondary" (click)="exportJson()">
-        <span>Export JSON</span>
-      </button>
-    </div>
-  </div>
-
-  <div class="add-lang-panel" *ngIf="showAddLang">
-    <input type="text" placeholder="Code (e.g. fr)" [(ngModel)]="newLanguageCode">
-    <input type="text" placeholder="Name (e.g. French)" [(ngModel)]="newLanguageName">
-    <button class="add-btn" (click)="addNewLanguage()">Add Language</button>
-  </div>
-
-  <div class="playground-grid">
-    <div class="translation-card" *ngFor="let item of filteredUnits()">
-      <div class="card-header">
-        <span class="key-label">{{ item.id }}</span>
+    <div class="nav-group">
+      <label>Target Languages</label>
+      <div *ngFor="let lang of languages" class="lang-chip" [class.active]="activeLang === lang.code"
+        (click)="activeLang = lang.code">
+        <span class="lang-code">{{ lang.code | uppercase }}</span>
+        <span class="lang-name">{{ lang.name }}</span>
       </div>
-      <div class="content-row">
-        <div class="source-text">
-          <small>Source (EN)</small>
-          <p>{{ item.source }}</p>
-        </div>
-        <div class="target-input">
-          <small>Target ({{ activeLang | uppercase }})</small>
-          <textarea rows="2" [placeholder]="'Translate to ' + activeLang + '...'" [value]="item.target || ''"
-            (input)="updateValue(item.id, $event)"></textarea>
+
+      <button class="btn-premium secondary" (click)="showAddLang = true" style="margin-top: 1rem;">
+        <i class="material-icons">add</i>
+        <span>Add Locale</span>
+      </button>
+    </div>
+
+    <div style="margin-top: auto;">
+      <div class="nav-group">
+        <label>System</label>
+        <div class="lang-chip" (click)="loadTranslations(activeLang)">
+          <i class="material-icons" style="font-size: 1rem;">refresh</i>
+          <span>Reload Source</span>
         </div>
       </div>
     </div>
-  </div>
+  </aside>
 
-  <div class="empty-state" *ngIf="filteredUnits().length === 0">
-    <p>No translation units found matching your search.</p>
+  <!-- Main Workspace -->
+  <main class="main-content">
+    <header class="header-actions">
+      <div class="search-wrapper">
+        <i class="material-icons">search</i>
+        <input type="text" placeholder="Filter by ID or content..." (input)="updateSearch($event)"
+          [value]="searchQuery()">
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn-premium secondary" (click)="exportJson()">
+          <i class="material-icons">code</i>
+          <span>Export JSON</span>
+        </button>
+        <button class="btn-premium primary" (click)="exportXliff()">
+          <i class="material-icons">download</i>
+          <span>Save XLIFF</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="units-grid">
+      <div class="unit-card" *ngFor="let item of filteredUnits(); let i = index"
+        [style.animation-delay]="i * 0.05 + 's'" style="animation: slideUp 0.6s both;">
+        <div class="unit-meta">
+          <span class="unit-id">#{{ item.id }}</span>
+          <i class="material-icons" style="font-size: 1rem; color: #334155;">translate</i>
+        </div>
+
+        <div class="translation-split">
+          <div class="source-pane">
+            <label>Source Text</label>
+            <p>{{ item.source }}</p>
+          </div>
+
+          <div class="target-pane">
+            <label>Current Translation ({{ activeLang | uppercase }})</label>
+            <textarea [placeholder]="'Enter ' + activeLang + ' version...'" [value]="item.target || ''"
+              (input)="updateValue(item.id, $event)"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="filteredUnits().length === 0"
+      style="text-align: center; padding: 5rem 0; opacity: 0.5;">
+      <i class="material-icons" style="font-size: 4rem; margin-bottom: 1rem;">search_off</i>
+      <h3>No matches found</h3>
+      <p>Try adjusting your search or switching languages.</p>
+    </div>
+  </main>
+</div>
+
+<!-- Add Language Modal -->
+<div class="overlay" *ngIf="showAddLang" (click)="showAddLang = false">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <h3>New Language</h3>
+    <p style="color: #64748b; margin-bottom: 2rem;">Add a new translation target to the project.</p>
+
+    <div class="form-group">
+      <label style="font-size: 0.8rem; font-weight: 600;">Locale Code</label>
+      <input type="text" placeholder="e.g. fr, de, es" [(ngModel)]="newLanguageCode">
+    </div>
+
+    <div class="form-group">
+      <label style="font-size: 0.8rem; font-weight: 600;">Display Name</label>
+      <input type="text" placeholder="e.g. French, German" [(ngModel)]="newLanguageName">
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-premium secondary" (click)="showAddLang = false">Cancel</button>
+      <button class="btn-premium primary" (click)="addNewLanguage()">Add Language</button>
+    </div>
   </div>
 </div>

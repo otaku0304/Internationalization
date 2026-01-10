@@ -1,36 +1,35 @@
-<h1 class="text-center">Feedback Form</h1>
-<div [formGroup]="formGroup" class="text-center mt-5">
-  <div>
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="Enter your email"
-        [formControl]="emailField"
-        required
-      />
-      <mat-error *ngIf="emailField.invalid">{{
-        getErrorMessage(emailField)
-      }}</mat-error>
-    </mat-form-field>
+<div class="feedback-wrapper">
+  <div class="feedback-card">
+    <h1 i18n>Feedback</h1>
+    <p i18n>We'd love to hear your thoughts on the Studio experience.</p>
+
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label i18n>Email Address</label>
+        <mat-form-field appearance="fill" subscriptSizing="dynamic">
+          <input matInput placeholder="your@email.com" [formControl]="emailField" required />
+        </mat-form-field>
+        <mat-error *ngIf="emailField.invalid && emailField.touched"
+          style="font-size: 0.75rem; margin-top: 0.4rem; color: #f87171; margin-left: 0.5rem;">
+          {{ getErrorMessage(emailField) }}
+        </mat-error>
+      </div>
+
+      <div class="form-group">
+        <label i18n>Message</label>
+        <mat-form-field appearance="fill" subscriptSizing="dynamic">
+          <textarea matInput rows="5" placeholder="Share your feedback..." [formControl]="feedbackField"
+            required></textarea>
+        </mat-form-field>
+        <mat-error *ngIf="feedbackField.invalid && feedbackField.touched"
+          style="font-size: 0.75rem; margin-top: 0.4rem; color: #f87171; margin-left: 0.5rem;">
+          {{ getErrorMessage(feedbackField) }}
+        </mat-error>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="formGroup.invalid" i18n>
+        Send Feedback
+      </button>
+    </form>
   </div>
-  <div>
-    <mat-form-field class="half-width">
-      <textarea
-        matInput
-        placeholder="Enter your feedback"
-        [formControl]="feedbackField"
-        required
-      ></textarea>
-      <mat-error *ngIf="feedbackField.invalid">{{
-        getErrorMessage(feedbackField)
-      }}</mat-error>
-    </mat-form-field>
-  </div>
-  <button
-    class="btn btn-danger pt-2"
-    (click)="onSubmit()"
-    [disabled]="formGroup.invalid"
-  >
-    Submit Feedback
-  </button>
 </div>

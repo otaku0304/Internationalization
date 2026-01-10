@@ -1,12 +1,66 @@
-.image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px; 
+.about-container {
+  max-width: 900px;
+  margin: 6rem auto;
+  padding: 0 2rem;
 }
 
-.circular-image {
-  width: 200px; 
-  height: 200px; 
-  border-radius: 100%;
+.profile-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 32px;
+  padding: 4rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #fff 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bio {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: #94a3b8;
+  margin-bottom: 3rem;
+}
+
+.journey-section {
+  margin-top: 5rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.journey-card {
+  background: rgba(255, 255, 255, 0.01);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  text-align: left;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(99, 102, 241, 0.2);
+    transform: translateY(-5px);
+  }
+
+  h3 {
+    color: #6366f1;
+    margin-top: 0;
+  }
+
+  p {
+    line-height: 1.6;
+    color: #cbd5e1;
+  }
 }

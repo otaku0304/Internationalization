@@ -1,0 +1,117 @@
+.feedback-wrapper {
+    max-width: 600px;
+    margin: 6rem auto;
+    padding: 0 2rem;
+}
+
+.feedback-card {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.6s ease-out;
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(135deg, #fff 0%, #6366f1 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+    }
+
+    p {
+        color: #64748b;
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #94a3b8;
+        margin-bottom: 0.5rem;
+        margin-left: 0.5rem;
+    }
+
+    /* Styling Material Form Fields to look custom */
+    ::v-deep .mat-mdc-form-field {
+        width: 100%;
+
+        .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+            background-color: rgba(255, 255, 255, 0.03) !important;
+            border-radius: 12px !important;
+        }
+
+        .mdc-line-ripple {
+            display: none;
+        }
+
+        .mat-mdc-form-field-flex {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 0 1rem !important;
+            transition: all 0.3s;
+        }
+
+        &.mat-focused .mat-mdc-form-field-flex {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        input,
+        textarea {
+            color: #fff !important;
+
+            &::placeholder {
+                color: #475569 !important;
+            }
+        }
+    }
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+
+    &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.5);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: #1e293b;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

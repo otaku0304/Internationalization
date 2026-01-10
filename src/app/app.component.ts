@@ -30,14 +30,6 @@ import { filter, map } from 'rxjs';
 export class AppComponent {
   currentYear: number = new Date().getFullYear();
 
-  siteLanguage: any;
-  siteLocale = 'en';
-  languageList = [
-    { code: 'en', label: 'English' },
-    { code: 'nl', label: 'Netherlands' },
-    { code: 'sr', label: 'Serbian' },
-  ];
-
   private readonly siteUrl = "https://internationalization-d2aa6.web.app/en/";
 
   constructor(
@@ -48,10 +40,6 @@ export class AppComponent {
   ) { }
 
   ngOnInit() {
-    this.siteLocale = window.location.pathname.split('/')[1];
-    this.siteLanguage = this.languageList.find(
-      (f) => f.code === this.siteLocale
-    )?.label;
     this.currentYear = new Date().getFullYear();
     this.router.events
       .pipe(

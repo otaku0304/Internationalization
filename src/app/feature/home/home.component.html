@@ -1,31 +1,39 @@
-<h1 class="text-center">Demo of i18n | internationalization </h1>
-<div class="px-4 py-4">
-  <h3 class="pt-4 fs-16 m-0" i18n="@@welcomeMessage">
-    Welcome to my i18n demonstration page! Here, we're showcasing the power of
-    internationalization (i18n) – a crucial aspect of modern applications that
-    enables them to adapt and cater to diverse audiences around the world.
-  </h3>
-  <h3 class="pt-3 fs-16 m-0" i18n="@@navigateMessage">
-    As you navigate through this page, you'll notice that the content seamlessly
-    transforms to match different languages and locales. This means that whether
-    you're reading this in English, Spanish, French, or any other language, the
-    message remains clear and accessible.
-  </h3>
-  <h3 class="pt-3 fs-16 m-0" i18n="@@beyondTranslationMessage">
-    i18n goes beyond just translating words; it encompasses date formats,
-    currencies, and even cultural nuances, ensuring that users feel at home no
-    matter where they're from. This is achieved through a combination of smart
-    coding practices and localization efforts, which make applications like this
-    truly global.
-  </h3>
-  <h3 class="pt-3 fs-16 m-0" i18n="@@languageSelectorMessage">
-    Feel free to switch between languages using the language selector at the top
-    of the page. Watch as the content instantly adapts, showcasing the magic of
-    i18n. This technology has revolutionized how applications connect with users
-    worldwide, and we're excited to share this demonstration with you.
-  </h3>
-  <h3 class="pt-3 fs-16 m-0 pb-2" i18n="@@thankYouMessage">
-    Thank you for being a part of this journey into the world of i18n. Your
-    seamless experience across languages starts right here, right now.
-  </h3>
+<div class="hero-section">
+  <div class="badge" i18n>Next-Gen i18n Demo</div>
+
+  <h1 i18n="@@welcomeMessage">
+    Globalize your apps <br> with precision.
+  </h1>
+
+  <p class="description" i18n="@@navigateMessage">
+    Experience the power of native Angular internationalization. A robust system designed for high-performance,
+    multilingual applications.
+  </p>
+
+  <div class="cta-group">
+    <a [routerLink]="['/studio']" class="btn-premium primary" i18n>Open Studio</a>
+    <a [routerLink]="['/about']" class="btn-premium secondary" i18n>Learn More</a>
+  </div>
+
+  <div class="features-grid"
+    style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 5rem; width: 100%; max-width: 1000px;">
+    <div class="feature-card"
+      style="padding: 2rem; background: rgba(255,255,255,0.02); border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+      <i class="material-icons" style="color: #6366f1; font-size: 2rem; margin-bottom: 1rem;">code</i>
+      <h3 i18n>Clean Code</h3>
+      <p style="color: #64748b; font-size: 0.9rem;" i18n>Standard XLIFF files with no proprietary libraries.</p>
+    </div>
+    <div class="feature-card"
+      style="padding: 2rem; background: rgba(255,255,255,0.02); border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+      <i class="material-icons" style="color: #8b5cf6; font-size: 2rem; margin-bottom: 1rem;">speed</i>
+      <h3 i18n>Fast Performance</h3>
+      <p style="color: #64748b; font-size: 0.9rem;" i18n>Zero-runtime overhead for translations.</p>
+    </div>
+    <div class="feature-card"
+      style="padding: 2rem; background: rgba(255,255,255,0.02); border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+      <i class="material-icons" style="color: #d946ef; font-size: 2rem; margin-bottom: 1rem;">groups</i>
+      <h3 i18n>Crowdsourced</h3>
+      <p style="color: #64748b; font-size: 0.9rem;" i18n>Collaborative studio for community translations.</p>
+    </div>
+  </div>
 </div>
