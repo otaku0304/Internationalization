@@ -1,52 +1,54 @@
-.bg-container {
+.app-shell {
   display: flex;
   flex-direction: column;
-  background-image: url("../assets/images/bg.webp");
-  background-size: cover;
-  width: 100%;
-  overflow: hidden;
   min-height: 100vh;
 }
 
-.content-rectangle {
-  margin: auto;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 800px;
-  height: 400px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.content {
+.main-container {
   flex: 1;
-  overflow: auto;
+  padding-bottom: 5rem;
 }
 
-.content-rectangle mat-icon {
-  vertical-align: middle;
-  margin-right: 5px;
-}
+.glass-footer {
+  margin-top: auto;
+  padding: 3rem 2rem;
+  background: rgba(15, 17, 26, 0.4);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 
-.language-button-container {
-  display: flex;
-  position: absolute;
-  right: 10px;
-}
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
 
-footer {
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 10px 0;
-  border-top: 1px solid #d9534f;
-  border-left: 1px solid #d9534f;
-  border-right: 1px solid #d9534f;
-  border-bottom: 1px solid #d9534f;
-  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    p {
+      color: #64748b;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+
+    a {
+      color: #64748b;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+
+      i {
+        font-size: 1.2rem;
+      }
+
+      &:hover {
+        color: #fff;
+        transform: translateY(-3px);
+      }
+    }
+  }
 }

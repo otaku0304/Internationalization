@@ -12,6 +12,15 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'studio',
+    loadComponent: () =>
+      import('./feature/translator/translator.component').then((m) => m.TranslatorComponent),
+    title: 'Translator Studio - Crowdsourced I18n',
+    data: {
+      description: 'Crowdsource and collaborate on translations for the Internationalization platform.',
+    },
+  },
+  {
     path: 'about',
     loadComponent: () =>
       import('./i18n/about/about.component').then((m) => m.AboutComponent),

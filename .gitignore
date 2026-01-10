@@ -40,3 +40,12 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Firebase
+.firebase/
+service-account.json
+
+# Local Environment
+.env
+.env.*
+.local.env

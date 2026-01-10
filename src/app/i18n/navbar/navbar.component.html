@@ -1,29 +1,36 @@
-<div class="button-container nav-pills">
-  <button
-    class="btn btn-danger"
-    [routerLink]="['/']"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
-  >
-    Home
-  </button>
-  <button
-    class="btn btn-danger"
-    [routerLink]="['/about']"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
-  >
-    About
-  </button>
-  <button class="btn btn-danger" (click)="navigateToPdfPwdRmv()">
-    PDF Password Remover
-  </button>
-  <button
-    class="btn btn-danger"
-    [routerLink]="['/feedback']"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
-  >
-    Feedback
-  </button>
-</div>
+<nav class="navbar-glass">
+  <a class="nav-link" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <i class="material-icons">home</i>
+    <span>Home</span>
+  </a>
+
+  <a class="nav-link" [routerLink]="['/studio']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <i class="material-icons">translate</i>
+    <span>Translator Studio</span>
+  </a>
+
+  <a class="nav-link" [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <i class="material-icons">person</i>
+    <span>About</span>
+  </a>
+
+  <a class="nav-link btn-external" href="javascript:void(0)" (click)="navigateToPdfPwdRmv()">
+    <i class="material-icons">security</i>
+    <span>PDF Tool</span>
+  </a>
+
+  <a class="nav-link" [routerLink]="['/feedback']" routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }">
+    <i class="material-icons">chat_bubble</i>
+    <span>Feedback</span>
+  </a>
+
+  <div class="nav-divider"></div>
+
+  <div class="lang-selector">
+    <button *ngFor="let lang of languages" class="lang-btn" [class.active]="currentLocale === lang.code"
+      (click)="switchSiteLanguage(lang.code)">
+      {{ lang.code | uppercase }}
+    </button>
+  </div>
+</nav>
