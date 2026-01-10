@@ -24,4 +24,13 @@
     <i class="material-icons">chat_bubble</i>
     <span>Feedback</span>
   </a>
+
+  <div class="nav-divider"></div>
+
+  <div class="lang-selector">
+    <button *ngFor="let lang of languages" class="lang-btn" [class.active]="currentLocale === lang.code"
+      (click)="switchSiteLanguage(lang.code)">
+      {{ lang.code | uppercase }}
+    </button>
+  </div>
 </nav>

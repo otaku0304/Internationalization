@@ -14,7 +14,7 @@
         <span class="lang-name">{{ lang.name }}</span>
       </div>
 
-      <button class="btn-premium secondary" (click)="showAddLang = true" style="margin-top: 1rem;">
+      <button class="btn-premium secondary" (click)="openModal()" style="margin-top: 1rem;">
         <i class="material-icons">add</i>
         <span>Add Locale</span>
       </button>
@@ -86,7 +86,7 @@
 </div>
 
 <!-- Add Language Modal -->
-<div class="overlay" *ngIf="showAddLang" (click)="showAddLang = false">
+<div class="overlay" *ngIf="showAddLang" (click)="closeModal()">
   <div class="modal" (click)="$event.stopPropagation()">
     <h3>New Language</h3>
     <p style="color: #64748b; margin-bottom: 2rem;">Add a new translation target to the project.</p>
@@ -102,7 +102,7 @@
     </div>
 
     <div class="modal-actions">
-      <button class="btn-premium secondary" (click)="showAddLang = false">Cancel</button>
+      <button class="btn-premium secondary" (click)="closeModal()">Cancel</button>
       <button class="btn-premium primary" (click)="addNewLanguage()">Add Language</button>
     </div>
   </div>

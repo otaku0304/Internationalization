@@ -22,6 +22,14 @@ export class TranslatorComponent implements OnInit {
     showAddLang = false;
     searchQuery = signal('');
 
+    openModal() {
+        this.showAddLang = true;
+    }
+
+    closeModal() {
+        this.showAddLang = false;
+    }
+
     // Computed results based on search
     filteredUnits = computed(() => {
         const query = this.searchQuery().toLowerCase();

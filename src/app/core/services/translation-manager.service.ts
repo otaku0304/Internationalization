@@ -79,6 +79,9 @@ export class TranslationManagerService {
       if (targetDoc) {
         const targetUnit = targetDoc.querySelector(`trans-unit[id="${id}"]`);
         target = targetUnit?.querySelector('target')?.textContent || '';
+      } else {
+        // If no target doc, we are likely viewing the source language (English)
+        target = source;
       }
 
       units.push({ id, source, target });
