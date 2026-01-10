@@ -1,0 +1,64 @@
+<div class="translator-container">
+  <header>
+    <div>
+      <h1>Translation Studio</h1>
+      <p>Native Angular i18n Crowdsourcing Platform</p>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="search-box">
+      <input type="text" placeholder="Search keys or text..." (input)="updateSearch($event)" [value]="searchQuery()">
+    </div>
+
+    <div class="language-selector">
+      <select [ngModel]="activeLang" (ngModelChange)="activeLang = $event">
+        <option *ngFor="let lang of languages" [value]="lang.code">
+          {{ lang.name }} ({{ lang.code | uppercase }})
+        </option>
+      </select>
+    </div>
+
+    <button type="button" (click)="showAddLang = !showAddLang">
+      <span>+ Add Language</span>
+    </button>
+
+    <div class="export-group">
+      <button type="button" class="primary" (click)="exportXliff()">
+        <span>Export XLIFF</span>
+      </button>
+      <button type="button" class="secondary" (click)="exportJson()">
+        <span>Export JSON</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="add-lang-panel" *ngIf="showAddLang">
+    <input type="text" placeholder="Code (e.g. fr)" [(ngModel)]="newLanguageCode">
+    <input type="text" placeholder="Name (e.g. French)" [(ngModel)]="newLanguageName">
+    <button class="add-btn" (click)="addNewLanguage()">Add Language</button>
+  </div>
+
+  <div class="playground-grid">
+    <div class="translation-card" *ngFor="let item of filteredUnits()">
+      <div class="card-header">
+        <span class="key-label">{{ item.id }}</span>
+      </div>
+      <div class="content-row">
+        <div class="source-text">
+          <small>Source (EN)</small>
+          <p>{{ item.source }}</p>
+        </div>
+        <div class="target-input">
+          <small>Target ({{ activeLang | uppercase }})</small>
+          <textarea rows="2" [placeholder]="'Translate to ' + activeLang + '...'" [value]="item.target || ''"
+            (input)="updateValue(item.id, $event)"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="filteredUnits().length === 0">
+    <p>No translation units found matching your search.</p>
+  </div>
+</div>

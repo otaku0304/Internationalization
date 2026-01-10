@@ -1,0 +1,251 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #121218, #050507);
+  color: #fff;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.translator-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+header {
+  margin-bottom: 2.5rem;
+  animation: fadeIn 0.8s ease-out;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+  }
+
+  p {
+    color: #8888a0;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.controls {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  .search-box {
+    flex: 1;
+    min-width: 250px;
+
+    input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      color: #fff;
+      transition: all 0.3s;
+
+      &:focus {
+        outline: none;
+        border-color: #4facfe;
+        background: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+
+  .language-selector select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  button {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+    }
+  }
+
+  .export-group {
+    display: flex;
+    gap: 0.8rem;
+
+    .primary {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      border: none;
+      color: #000;
+
+      &:hover {
+        box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+      }
+    }
+
+    .secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+    }
+  }
+}
+
+.add-lang-panel {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  animation: slideDown 0.3s ease-out;
+  background: rgba(79, 172, 254, 0.1);
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(79, 172, 254, 0.2);
+
+  input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.7rem;
+    border-radius: 8px;
+    color: #fff;
+    flex: 1;
+  }
+
+  .add-btn {
+    background: #4facfe;
+    color: #000;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+}
+
+.playground-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.translation-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(79, 172, 254, 0.3);
+  }
+
+  .card-header {
+    margin-bottom: 1rem;
+
+    .key-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #4facfe;
+      background: rgba(79, 172, 254, 0.1);
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+    }
+  }
+
+  .content-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  small {
+    display: block;
+    color: #666;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  .source-text p {
+    margin: 0;
+    line-height: 1.6;
+    color: #ccd;
+    font-size: 1.05rem;
+  }
+
+  .target-input textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1rem;
+    color: #fff;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    resize: vertical;
+    transition: 0.3s;
+
+    &:focus {
+      outline: none;
+      border-color: #00f2fe;
+      background: rgba(0, 0, 0, 0.6);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

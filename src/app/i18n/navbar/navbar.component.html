@@ -1,29 +1,21 @@
 <div class="button-container nav-pills">
-  <button
-    class="btn btn-danger"
-    [routerLink]="['/']"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
-  >
+  <button class="btn btn-danger" [routerLink]="['/']" routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }">
     Home
   </button>
-  <button
-    class="btn btn-danger"
-    [routerLink]="['/about']"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
-  >
+  <button class="btn btn-danger" [routerLink]="['/about']" routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }">
     About
   </button>
   <button class="btn btn-danger" (click)="navigateToPdfPwdRmv()">
     PDF Password Remover
   </button>
-  <button
-    class="btn btn-danger"
-    [routerLink]="['/feedback']"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
-  >
+  <button class="btn btn-danger" [routerLink]="['/studio']" routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }">
+    Translator Studio
+  </button>
+  <button class="btn btn-danger" [routerLink]="['/feedback']" routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }">
     Feedback
   </button>
 </div>
