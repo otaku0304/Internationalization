@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AppConfig } from 'src/app/core/config/app.Config';
-
 import { CommonModule } from '@angular/common';
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   private readonly navigateToPdfPasswordRemover = AppConfig.pdfPasswordRemover();
+  public themeService = inject(ThemeService);
 
   currentLocale = window.location.pathname.split('/')[1] || 'en';
 
@@ -29,4 +30,9 @@ export class NavbarComponent {
   switchSiteLanguage(code: string) {
     window.location.href = `/${code}${window.location.pathname.substring(3) || ''}`;
   }
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
+  }
 }
+

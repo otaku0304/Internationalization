@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { Meta, Title } from '@angular/platform-browser';
 import { filter, map } from 'rxjs';
 
+import { ThemeService } from './core/services/theme.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -33,11 +35,13 @@ export class AppComponent {
   private readonly siteUrl = "https://internationalization-d2aa6.web.app/en/";
 
   constructor(
+    private readonly themeService: ThemeService,
     private readonly meta: Meta,
     private readonly title: Title,
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) { }
+
 
   ngOnInit() {
     this.currentYear = new Date().getFullYear();

@@ -27,7 +27,17 @@
 
   <div class="nav-divider"></div>
 
+  <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="'Toggle dark mode'">
+    <div class="toggle-track">
+      <div class="toggle-thumb" [class.dark]="themeService.theme() === 'dark'">
+        <i class="material-icons sun-icon">light_mode</i>
+        <i class="material-icons moon-icon">dark_mode</i>
+      </div>
+    </div>
+  </button>
+
   <div class="lang-selector">
+
     <button *ngFor="let lang of languages" class="lang-btn" [class.active]="currentLocale === lang.code"
       (click)="switchSiteLanguage(lang.code)">
       {{ lang.code | uppercase }}
