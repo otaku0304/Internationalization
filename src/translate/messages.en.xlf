@@ -52,7 +52,7 @@
       </trans-unit>
       <trans-unit id="aboutMeHeading" datatype="html">
         <source>About Me</source>
-        <target>About Me</target>
+        <target>Sai Krishna Annam</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
           <context context-type="linenumber">10</context>
@@ -60,7 +60,7 @@
       </trans-unit>
       <trans-unit id="aboutMeContent" datatype="html">
         <source> Hello there! I&apos;m Sai Krishna Annam, a passionate Full Stack developer who thrives on bringing ideas to life through code. With a knack for problem-solving and a love for crafting seamless digital experiences, I&apos;m always on the lookout for the next exciting challenge in the world of web development. </source>
-        <target>Hello there! I'm Sai Krishna Annam, a passionate Full Stack developer who thrives on bringing ideas to life through code. With a knack for problem-solving and a love for crafting seamless digital experiences, I'm always on the lookout for the next exciting challenge in the world of web development.</target>
+        <target>A dedicated Software Engineer with a strong foundation in backend development. Creator of developer utilities like "StartMyDev" and "PDF Password Remover".</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
           <context context-type="linenumber">11,17</context>
@@ -76,7 +76,7 @@
       </trans-unit>
       <trans-unit id="journeyContent1" datatype="html">
         <source> My journey into the world of programming began with an unexpected twist. Graduating in Mechanical Engineering, I was far from familiar with coding. However, my strong affinity for technology and my knack for making the most out of a PC ignited a spark within me. It was this very interest that motivated me to embark on a new adventure: learning to code. </source>
-        <target>My journey into the world of programming began with an unexpected twist. Graduating in Mechanical Engineering, I was far from familiar with coding. However, my strong affinity for technology and my knack for making the most out of a PC ignited a spark within me. It was this very interest that motivated me to embark on a new adventure: learning to code.</target>
+        <target>I maintain a GitHub profile under the username otaku0304. My work involves building web applications with Angular &amp; Flask, and creating automation scripts for Windows/Linux environments.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
           <context context-type="linenumber">21,27</context>
@@ -92,7 +92,7 @@
       </trans-unit>
       <trans-unit id="journeyContent3" datatype="html">
         <source> Throughout this journey, I&apos;ve had the privilege of collaborating with exceptionally talented individuals and dynamic teams. These experiences have not only honed my technical skills but have also added layers of depth to my expertise. I&apos;ve come to realize that coding isn&apos;t just about syntax and algorithms; it&apos;s about creatively solving problems and building digital experiences that leave a mark. </source>
-        <target>Throughout this journey, I've had the privilege of collaborating with exceptionally talented individuals and dynamic teams. These experiences have not only honed my technical skills but have also added layers of depth to my expertise. I've come to realize that coding isn't just about syntax and algorithms; it's about creatively solving problems and building digital experiences that leave a mark.</target>
+        <target>I focus on building tools that solve practical problems. From securing data to automating project setups, I aim to streamline workflows and enhance developer productivity.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/i18n/about/about.component.html</context>
           <context context-type="linenumber">35,42</context>

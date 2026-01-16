@@ -18,13 +18,16 @@
 }
 
 h1 {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 800;
   margin-bottom: 2rem;
   background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  word-break: break-word; /* Ensure it wraps if really needed */
+  overflow-wrap: break-word;
+  line-height: 1.2; /* Better line height for wrapped text */
 }
 
 .bio {
