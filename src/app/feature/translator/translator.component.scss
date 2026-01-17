@@ -2,10 +2,7 @@
   display: block;
   min-height: 100vh;
   background-color: var(--bg-color);
-  background-image:
-    radial-gradient(at 0% 0%, var(--accent-glow) 0, transparent 50%),
-    radial-gradient(at 50% 0%, var(--accent-glow) 0, transparent 50%),
-    radial-gradient(at 100% 0%, var(--accent-glow) 0, transparent 50%);
+
   color: var(--text-primary);
   font-family: 'Outfit', sans-serif;
   overflow-x: hidden;
