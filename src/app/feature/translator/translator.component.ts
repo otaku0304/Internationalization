@@ -17,18 +17,7 @@ export class TranslatorComponent implements OnInit {
     private xliffService = inject(TranslationManagerService);
 
     // UI state
-    newLanguageCode = '';
-    newLanguageName = '';
-    showAddLang = false;
     searchQuery = signal('');
-
-    openModal() {
-        this.showAddLang = true;
-    }
-
-    closeModal() {
-        this.showAddLang = false;
-    }
 
     // Computed results based on search
     filteredUnits = computed(() => {
@@ -91,16 +80,6 @@ export class TranslatorComponent implements OnInit {
     updateValue(id: string, event: Event) {
         const val = (event.target as HTMLTextAreaElement).value;
         this.xliffService.updateTranslation(id, val);
-    }
-
-    addNewLanguage() {
-        if (this.newLanguageCode && this.newLanguageName) {
-            this.xliffService.addLanguage(this.newLanguageCode, this.newLanguageName);
-            this.activeLang = this.newLanguageCode;
-            this.newLanguageCode = '';
-            this.newLanguageName = '';
-            this.showAddLang = false;
-        }
     }
 
     exportXliff() {
